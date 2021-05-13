@@ -25,7 +25,11 @@ spec:
           image: kubenav/kubenav:3.3.0
           imagePullPolicy: IfNotPresent
           args:
-            - --incluster
+            - --kubeconfig=/kubenav/kubeconfig/kubeconfig
+          volumeMounts:
+            - name: kubeconfig
+              mountPath: '/kubenav/kubeconfig'
+              readOnly: true
           ports:
             - name: http
               containerPort: 14122
@@ -40,8 +44,12 @@ spec:
               port: http
           resources:
             limits:
+              cpu: 400m
+              memory: 512Mi
+            requests:
               cpu: 100m
               memory: 128Mi
-            requests:
-              cpu: 50m
-              memory: 64Mi
+      volumes:
+        - name: kubeconfig
+          secret:
+            secretName: kubeconfig

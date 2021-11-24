@@ -22,7 +22,7 @@ spec:
       serviceAccountName: kubenav
       containers:
         - name: kubenav
-          image: kubenav/kubenav:3.8.1
+          image: kubenav/kubenav:3.7.0
           imagePullPolicy: IfNotPresent
           args:
              - --kubeconfig=/kubenav/kubeconfig/kubeconfig
